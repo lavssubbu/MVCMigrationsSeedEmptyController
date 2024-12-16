@@ -1,0 +1,57 @@
+﻿@model IEnumerable<CMSMVCCodeFirstEFDemo.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.custName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.custLoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateofbirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.orders)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.custName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.custLoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateofbirth)
+            </td>
+            <td>
+                    @foreach (var order in item.orders)
+                    {
+                        <p>@order.ProductName</p>
+                    }
+                    
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.custId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.custId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.custId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
